@@ -1,4 +1,5 @@
 package com.tarena.entity;
+//
 public class Question {
 	private String userName;
 	private String date;
