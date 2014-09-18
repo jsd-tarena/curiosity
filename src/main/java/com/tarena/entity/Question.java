@@ -1,5 +1,5 @@
 package com.tarena.entity;
-//问答
+//问答:
 public class Question {
 	private String userName;
 	private String date;
