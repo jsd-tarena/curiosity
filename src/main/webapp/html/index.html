@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>求知--主页</title>
+<title>求知-主页</title>
+<script type="text/javascript" src="../static/jquery-1.11.1.js">
+</script>
+<script type="text/javascript" src="../static/json.js">
+</script>
+<script type="text/javascript" src="../static/xhr.js">
+</script>
+<script type="text/javascript">
+	function load() {
+		var xhr = getXhr();
+		xhr.open("get", "http://localhost:8080/curiosity/main.do");
+
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				var data = xhr.responseText;
+				var json_data = data.parseJSON();
+				var str = "";
+				for (i = 0; i < json_data.length; i++) {
+					str +=  "<li><a href=#"+">"+json_data[i] +"</a>"+ "</li>";
+				}
+				$("goodblog").innerHTML = str;
+			}
+		}
+		xhr.send();
+	}
+	$(function(){
+		$('#t1').keydown(function(e){
+		    if(e.keyCode == 13 && document.activeElement.id == "t1") {
+		    	execute();
+		    }
+		}); 
+	});
+</script>
+</head>
+
+<body onload="load();">
+	<div id="header">
+ 		<div class="logo"><a href="/">求知</a></div>
+        <div id="ask_form">
+           	<span style="position:absolute;left:30px;top:5px;z-index:2;font-size:16px;" id="choose_topic"></span>             
+           	<span class="search_m"> </span>           
+           	<input value="搜索问题、话题或者人" id="search_input" name="query" class="text placeholder" type="text" />
+           	<a href="execute();" id="search" class="search">搜索</a>
+           	<a href="http://localhost:8080/curiosity/html/ask.html" id="ask_question" class="search">提问</a>
+   		</div>
+		<div class="header_right"> </div>
+        <div class="headerArrow"></div>
+        
+	</div>
+    <div id="body">
+ 		<p style="font-style:normal;font-size:14px;color:#333;font-family:宋体;">新鲜事</p>
+    	<hr />
+        <ul id="goodblog">
+           
+       </ul>
+	</div>
+</body>
+</html>
